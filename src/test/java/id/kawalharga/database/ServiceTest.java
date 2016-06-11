@@ -2,13 +2,11 @@ package id.kawalharga.database;
 
 import id.kawalharga.model.CommodityInput;
 import id.kawalharga.model.User;
-import org.apache.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Map;
