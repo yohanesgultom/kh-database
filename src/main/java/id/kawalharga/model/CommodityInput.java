@@ -1,6 +1,10 @@
 package id.kawalharga.model;
 
+import java.text.NumberFormat;
+import java.text.SimpleDateFormat;
+import java.util.Currency;
 import java.util.Date;
+import java.util.Locale;
 
 /**
  * Created by yohanesgultom on 03/06/16.
@@ -96,6 +100,11 @@ public class CommodityInput {
 
     @Override
     public String toString() {
-        return String.format("%s dijual seharga Rp %.2f/kg di %s (%f, %f) dilaporkan oleh %s pada %s", this.name, this.price, this.location, this.geo.lat, this.geo.lng, this.user.getName(), this.createdAt);
+        Locale locale = new Locale("in", "ID");
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEE, dd MMM yyyy HH:mm", locale);
+        Currency idr = Currency.getInstance("IDR");
+        NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
+        nf.setCurrency(idr);
+        return String.format("%s dijual seharga %s/kg di %s (%f, %f) dilaporkan oleh %s pada %s", this.name, nf.format(this.price), this.location, this.geo.lat, this.geo.lng, this.user.getName(), sdf.format(this.createdAt));
     }
 }
