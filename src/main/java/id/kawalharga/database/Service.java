@@ -58,7 +58,7 @@ public class Service {
         String user = this.configProperties.getProperty("dataSource.username");
         String pass = this.configProperties.getProperty("dataSource.password");
         Class.forName(driver);
-        logger.info("Connecting to database...");
+        logger.debug("Opening database connection");
         this.connection = DriverManager.getConnection(url, user, pass);
         return this.connection;
     }
@@ -345,6 +345,7 @@ public class Service {
 
     public void closeDatabaseConnection() throws Exception {
         if (this.connection != null) {
+            logger.debug("Closing db connection");
             this.connection.close();
         }
     }
