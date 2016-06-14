@@ -189,3 +189,14 @@
 2016-06-11 17:32:07 DEBUG Service:332 - retrieved: Karkas Ayam Buras dijual seharga Rp67.000,00/kg di KAB. PIDIE (-6.285703, 106.913109) dilaporkan oleh Ivan Sugiarto pada Sabtu, 12 Des 2015 00:00
 2016-06-11 17:32:07 DEBUG Service:332 - retrieved: Beras Medium dijual seharga Rp12.000,00/kg di KAB. AGAM (-0.253183, 100.153736) dilaporkan oleh admin pada Sabtu, 12 Des 2015 00:00
 2016-06-11 17:32:07 INFO  Service:61 - Connecting to database...
+2016-06-13 15:53:18 DEBUG Service:61 - Opening database connection
+2016-06-13 15:53:18 DEBUG Service:99 - select id, username, nama, alamat, nohp, kodepos, email from auth_user where username = 'admin'
+2016-06-13 15:53:18 INFO  Service:109 - user retrieved: { id:6, username:admin, name:admin, email:admin@gmail.com }
+2016-06-13 15:53:18 DEBUG Service:348 - Closing db connection
+2016-06-13 15:53:18 DEBUG Service:61 - Opening database connection
+2016-06-13 15:53:18 DEBUG Service:332 - retrieved: Karkas Ayam Buras dijual seharga Rp50.000,00/kg di KAB. PIDIE (-6.222132, 106.887703) dilaporkan oleh Ivan Sugiarto pada Sabtu, 12 Des 2015 00:00
+2016-06-13 15:53:18 DEBUG Service:332 - retrieved: Karkas Ayam Buras dijual seharga Rp67.000,00/kg di KAB. PIDIE (-6.285703, 106.913109) dilaporkan oleh Ivan Sugiarto pada Sabtu, 12 Des 2015 00:00
+2016-06-13 15:53:18 DEBUG Service:332 - retrieved: Beras Medium dijual seharga Rp12.000,00/kg di KAB. AGAM (-0.253183, 100.153736) dilaporkan oleh admin pada Sabtu, 12 Des 2015 00:00
+2016-06-13 15:53:18 DEBUG Service:348 - Closing db connection
+2016-06-13 15:53:18 DEBUG Service:61 - Opening database connection
+2016-06-13 15:53:18 DEBUG Service:348 - Closing db connection
