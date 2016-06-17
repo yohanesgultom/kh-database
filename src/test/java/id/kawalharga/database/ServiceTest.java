@@ -84,7 +84,9 @@ public class ServiceTest {
         try {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy");
             Date date = sdf.parse("11-06-2016");
-            List<CommodityInput> list = instance.getInputsToBePosted(date, 10);
+            List<CommodityInput> list = instance.getInputsToBePosted(date, 10, "post_fb");
+            assert list != null;
+            list = instance.getInputsToBePosted(date, 10, "post_tw");
             assert list != null;
         } catch (Exception e) {
             e.printStackTrace();

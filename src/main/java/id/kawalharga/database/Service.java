@@ -351,7 +351,7 @@ public class Service {
         return commodityInputList;
     }
 
-    public List<CommodityInput> getInputsToBePosted(Date date, int limit) throws Exception {
+    public List<CommodityInput> getInputsToBePosted(Date date, int limit, String socialMediaTable) throws Exception {
         List<CommodityInput> commodityInputList = new ArrayList<CommodityInput>();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -382,7 +382,7 @@ public class Service {
                     "join comodity c on i.comodity_name_id = c.id " +
                     "join region r on i.region_id = r.id " +
                     "where i.date_created >= ? " +
-                    "and i.id not in ( select comodity_input_id from post_fb ) " +
+                    "and i.id not in ( select comodity_input_id from " + socialMediaTable + " ) " +
                     "and i.price > 1000 " +
                     "order by id asc limit ?");
             pstmt.setDate(1, new java.sql.Date(date.getTime()));
