@@ -10,6 +10,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.*;
 import java.util.*;
+import java.util.Date;
 
 /**
  * Created by yohanesgultom on 03/06/16.
@@ -61,6 +62,13 @@ public class Service {
         logger.debug("Opening database connection");
         this.connection = DriverManager.getConnection(url, user, pass);
         return this.connection;
+    }
+
+    public void closeDatabaseConnection() throws Exception {
+        if (this.connection != null) {
+            logger.debug("Closing db connection");
+            this.connection.close();
+        }
     }
 
     public Integer getUserId(String username) throws Exception {
@@ -343,11 +351,77 @@ public class Service {
         return commodityInputList;
     }
 
-    public void closeDatabaseConnection() throws Exception {
-        if (this.connection != null) {
-            logger.debug("Closing db connection");
-            this.connection.close();
+    public List<CommodityInput> getInputsToBePosted(Date date, int limit) throws Exception {
+        List<CommodityInput> commodityInputList = new ArrayList<CommodityInput>();
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Connection connection = this.connectToDatabase();
+        try {
+            Calendar nextDate = Calendar.getInstance();
+            nextDate.setTime(date);
+            nextDate.add(Calendar.DATE, 1);
+            pstmt = connection.prepareStatement("select " +
+                    "i.id, " +
+                    "c.name, " +
+                    "r.id as location_id, " +
+                    "r.name as location, " +
+                    "i.price, " +
+                    "i.amount, " +
+                    "i.lat, " +
+                    "i.lng, " +
+                    "i.description, " +
+                    "i.date_created, " +
+                    "u.id as user_id," +
+                    "u.nama as user_name," +
+                    "u.username as user_username," +
+                    "u.alamat as user_address," +
+                    "u.nohp as user_phone," +
+                    "u.kodepos as user_postal_code," +
+                    "u.email as user_email " +
+                    "from comodity_input i join auth_user u on i.user_id = u.id " +
+                    "join comodity c on i.comodity_name_id = c.id " +
+                    "join region r on i.region_id = r.id " +
+                    "where i.date_created >= ? " +
+                    "and i.id not in ( select comodity_input_id from post_fb ) " +
+                    "and i.price > 1000 " +
+                    "order by id asc limit ?");
+            pstmt.setDate(1, new java.sql.Date(date.getTime()));
+            pstmt.setInt(2, limit);
+            rs = pstmt.executeQuery();
+            while (rs.next()) {
+                id.kawalharga.model.User user = new id.kawalharga.model.User(
+                        rs.getLong("user_id"),
+                        rs.getString("user_username"),
+                        rs.getString("user_name"),
+                        rs.getString("user_address"),
+                        rs.getString("user_phone"),
+                        rs.getString("user_postal_code"),
+                        rs.getString("user_email"));
+                CommodityInput commodityInput = new CommodityInput(
+                        rs.getLong("id"),
+                        user,
+                        rs.getString("name"),
+                        rs.getString("location"),
+                        rs.getDouble("price"),
+                        rs.getDouble("lat"),
+                        rs.getDouble("lng"),
+                        rs.getLong("location_id"),
+                        rs.getString("description"),
+                        rs.getDate("date_created")
+                );
+                commodityInputList.add(commodityInput);
+                logger.debug("retrieved: " + commodityInput);
+            }
+        } catch (Exception e) {
+            throw e;
+        } finally {
+            if (rs != null)
+                rs.close();
+            if (pstmt != null)
+                pstmt.close();
         }
+        this.closeDatabaseConnection();
+        return commodityInputList;
     }
 
 }
