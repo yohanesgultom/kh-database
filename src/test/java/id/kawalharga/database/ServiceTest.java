@@ -26,7 +26,8 @@ public class ServiceTest {
     @Test
     public void testService() {
         try {
-            Map<String, Integer> regionMap = instance.getRegionMap();
+            Map<String, Long> regionMap = instance.getRegionMap();
+            Map<String, Long> commodityMap = instance.getCommodityMap();
             System.out.println(regionMap);
             assert(true);
         } catch (Exception e) {

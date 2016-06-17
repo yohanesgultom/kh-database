@@ -241,8 +241,8 @@ public class Service {
         this.closeDatabaseConnection();
     }
 
-    private HashMap<String, Integer> getMapValue(String tableName) throws Exception {
-        HashMap<String, Integer> regionMap = new HashMap<String, Integer>();
+    private HashMap<String, Long> getMapValue(String tableName) throws Exception {
+        HashMap<String, Long> regionMap = new HashMap<String, Long>();
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         this.connectToDatabase();
@@ -250,7 +250,7 @@ public class Service {
             pstmt = this.connection.prepareStatement("select id, upper(name) as name from " + tableName);
             rs = pstmt.executeQuery();
             while (rs.next()) {
-                regionMap.put(rs.getString("name").toUpperCase(), rs.getInt("id"));
+                regionMap.put(rs.getString("name").toUpperCase(), rs.getLong("id"));
             }
         } catch (Exception e) {
             throw e;
@@ -264,11 +264,11 @@ public class Service {
         return regionMap;
     }
 
-    public HashMap<String, Integer> getRegionMap() throws Exception {
+    public HashMap<String, Long> getRegionMap() throws Exception {
         return this.getMapValue("region");
     }
 
-    public HashMap<String, Integer> getCommodityMap() throws Exception {
+    public HashMap<String, Long> getCommodityMap() throws Exception {
         return this.getMapValue("comodity");
     }
 
