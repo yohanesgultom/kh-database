@@ -334,7 +334,7 @@ public class Service {
                         rs.getDouble("lng"),
                         rs.getLong("location_id"),
                         rs.getString("description"),
-                        rs.getDate("date_created")
+                        rs.getTimestamp("date_created")
                 );
                 commodityInputList.add(commodityInput);
                 logger.debug("retrieved: " + commodityInput);
@@ -407,7 +407,7 @@ public class Service {
                         rs.getDouble("lng"),
                         rs.getLong("location_id"),
                         rs.getString("description"),
-                        rs.getDate("date_created")
+                        rs.getTimestamp("date_created")
                 );
                 commodityInputList.add(commodityInput);
                 logger.debug("retrieved: " + commodityInput);
