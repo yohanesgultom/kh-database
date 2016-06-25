@@ -70,7 +70,7 @@ public class ServiceTest {
             Date date = sdf.parse("11-06-2016 12:00");
             User user = new User(0l, "user", "User", "rumah", "911", "12345", "user@email.com");
             CommodityInput commodityInput = new CommodityInput(0l, user, "bawang merah", "pasar", 19999, -6.239879, 106.862344, 0l, null, date);
-            String expected = "bawang merah dijual seharga Rp19.999,00/kg di pasar (-6.239879, 106.862344) dilaporkan oleh User pada Sabtu, 11 Jun 2016 12:00";
+            String expected = "bawang merah dijual seharga Rp19.999,00/kg di (-6.239879, 106.862344) dilaporkan oleh User pada Sabtu, 11 Jun 2016 12:00";
             Assert.assertEquals(expected, commodityInput.toString());
             assert true;
         } catch (Exception e) {

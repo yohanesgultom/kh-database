@@ -105,6 +105,6 @@ public class CommodityInput {
         Currency idr = Currency.getInstance("IDR");
         NumberFormat nf = NumberFormat.getCurrencyInstance(locale);
         nf.setCurrency(idr);
-        return String.format("%s dijual seharga %s/kg di %s (%f, %f) dilaporkan oleh %s pada %s", this.name, nf.format(this.price), this.location, this.geo.lat, this.geo.lng, this.user.getName(), sdf.format(this.createdAt));
+        return String.format("%s dijual seharga %s/kg di (%f, %f) dilaporkan oleh %s pada %s", this.name, nf.format(this.price), this.geo.lat, this.geo.lng, this.user.getName(), sdf.format(this.createdAt));
     }
 }
